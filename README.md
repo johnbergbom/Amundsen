@@ -72,8 +72,7 @@ Feel free to download the code and do whatever you want with it.
 
 #### Opening book
 
-Put the opening book in the same directory as the executable.
-[openings.bok](https://github.com/johnbergbom/Amundsen/blob/master/opening_book/openings.bok)
+Put the opening book in the same directory as the executable: [openings.bok](https://github.com/johnbergbom/Amundsen/blob/master/opening_book/openings.bok)
 
 #### Windows binaries
 
