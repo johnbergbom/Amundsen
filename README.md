@@ -23,26 +23,43 @@ Amundsen is capable of running testsuites through the "testsuite" command. For i
 
 #### Source code
 
-amundsen-0.80.tar.gz
-amundsen-0.75.tar.gz
-amundsen-0.70.tar.gz
-amundsen-0.65.1.tar.gz
-amundsen_v0.65.tar.gz
-amundsen_v0.60.tar.gz
-amundsen_v0.55.1.tar.gz
-amundsen_v0.55.tar.gz
-amundsen_v0.50.tar.gz
-amundsen_v0.45.tar.gz
-amundsen_v0.40.tar.gz
-amundsen_v0.35.tar.gz
-amundsen_v0.30.tar.gz
-jonte_v0.25.tar.gz
-jonte_v0.20.tar.gz
-jonte_v0.15.tar.gz
-jonte_v0.10.tar.gz
-jonte_v_pre0.10.tar.gz 
+[amundsen-0.80.tar.gz](https://github.com/johnbergbom/Amundsen/blob/master/old_versions/amundsen-0.80.tar.gz)
 
-Feel free to download the code and do whatever you want with it. If you have comments or suggestions for improvements, please drop me a note. In particular I'm interested in hearing about problems with compiling for other platforms than unix/Linux.
+[amundsen-0.75.tar.gz](https://github.com/johnbergbom/Amundsen/blob/master/old_versions/amundsen-0.75.tar.gz)
+
+[amundsen-0.70.tar.gz](https://github.com/johnbergbom/Amundsen/blob/master/old_versions/amundsen-0.70.tar.gz)
+
+[amundsen-0.65.1.tar.gz](https://github.com/johnbergbom/Amundsen/blob/master/old_versions/amundsen-0.65.1.tar.gz)
+
+[amundsen_v0.65.tar.gz](https://github.com/johnbergbom/Amundsen/blob/master/old_versions/amundsen_v0.65.tar.gz)
+
+[amundsen_v0.60.tar.gz](https://github.com/johnbergbom/Amundsen/blob/master/old_versions/amundsen_v0.60.tar.gz)
+
+[amundsen_v0.55.1.tar.gz](https://github.com/johnbergbom/Amundsen/blob/master/old_versions/amundsen_v0.55.1.tar.gz)
+
+[amundsen_v0.55.tar.gz](https://github.com/johnbergbom/Amundsen/blob/master/old_versions/amundsen_v0.55.tar.gz)
+
+[amundsen_v0.50.tar.gz](https://github.com/johnbergbom/Amundsen/blob/master/old_versions/amundsen_v0.50.tar.gz)
+
+[amundsen_v0.45.tar.gz](https://github.com/johnbergbom/Amundsen/blob/master/old_versions/amundsen_v0.45.tar.gz)
+
+[amundsen_v0.40.tar.gz](https://github.com/johnbergbom/Amundsen/blob/master/old_versions/amundsen_v0.40.tar.gz)
+
+[amundsen_v0.35.tar.gz](https://github.com/johnbergbom/Amundsen/blob/master/old_versions/amundsen_v0.35.tar.gz)
+
+[amundsen_v0.30.tar.gz](https://github.com/johnbergbom/Amundsen/blob/master/old_versions/amundsen_v0.30.tar.gz)
+
+[jonte_v0.25.tar.gz](https://github.com/johnbergbom/Amundsen/blob/master/old_versions/jonte_v0.25.tar.gz)
+
+[jonte_v0.20.tar.gz](https://github.com/johnbergbom/Amundsen/blob/master/old_versions/jonte_v0.20.tar.gz)
+
+[jonte_v0.15.tar.gz](https://github.com/johnbergbom/Amundsen/blob/master/old_versions/jonte_v0.15.tar.gz)
+
+[jonte_v0.10.tar.gz](https://github.com/johnbergbom/Amundsen/blob/master/old_versions/jonte_v0.10.tar.gz)
+
+[jonte_v_pre0.10.tar.gz](https://github.com/johnbergbom/Amundsen/blob/master/old_versions/jonte_v_pre0.10.tar.gz)
+
+Feel free to download the code and do whatever you want with it.
 
 #### Opening book
 
