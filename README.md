@@ -1,7 +1,7 @@
 # Amundsen
 #### General
 
-Amundsen is an XBoard compatible chess playing program, and it can participate in computer chess tournaments. Author is John Bergbom and the program is released under the GNU GPL license v. 2. From the beginning it was a college course project, but I kept working on it now and then when I had time until 2009 when active development stopped. Version 0.75 has a FICS rating of about 2240 in blitz (< 15 min), 2330 in lightning (< 5 minutes), and 2240 in standard (>= 15 min). 
+Amundsen is an XBoard compatible chess playing program, and it can participate in computer chess tournaments. Author is John Bergbom and the program is released under the GNU GPL license v. 2. From the beginning it was a college course project, but I kept working on it now and then when I had time until 2009 when active development stopped. Version 0.75 has a [FICS](http://www.freechess.org/) rating of about 2240 in blitz (< 15 min), 2330 in lightning (< 5 minutes), and 2240 in standard (>= 15 min). 
 
 A name change took place between version 0.25 and 0.3. The reason was that when the program started playing at FICS, the name jonte was taken already. 
 
