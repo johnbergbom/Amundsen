@@ -28,7 +28,7 @@ amundsen v. 0.65 vs. gnuchess v. 5.07: 30-52-18
 
 #### Testsuites
 
-Amundsen is capable of running testsuites through the "testsuite" command. For information on testsuite scores, instructions and epd files, click here.
+Amundsen is capable of running testsuites through the "testsuite" command. For information on testsuite scores, instructions and epd files, click [here](https://github.com/johnbergbom/Amundsen/tree/master/testsuites).
 
 #### Source code
 
