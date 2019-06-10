@@ -7,14 +7,14 @@ Amundsen beginning from version 0.50 is capable of running testsuites through th
 (10 seconds of search time has been used for each position)
 
 ```
-Testsuite Positions   v0.50   v0.55   v0.60	  v0.65	  v0.70	  v0.75	  v0.80
-bs2830           27       0       0	      1	      2	      3	      1	      0
-bt2630           30       5       8	     11	     16	     18	     18	     15
-ccc-1            11       2       2	      4	      4	      5	      4	      4
-ccc-2            11       0       0	      0	      0	      0	      0	      0
-ccc-3            45      17      21	     17	     17      23	     21	     21
+Testsuite Positions   v0.50   v0.55   v0.60   v0.65   v0.70   v0.75   v0.80
+bs2830           27       0       0       1	      2	      3	      1	      0
+bt2630           30       5       8      11	     16	     18	     18	     15
+ccc-1            11       2       2       4	      4	      5	      4	      4
+ccc-2            11       0       0       0	      0	      0	      0	      0
+ccc-3            45      17      21      17	     17      23	     21	     21
 ccc-4             4       2       2       1       1       1       0       1
-covax            25       0       0       0	      1       0       0       0
+covax            25       0       0       0       1       0       0       0
 covax2           15       0       0       1       1       1       1       2
 covax3          170      52      53      59      72      72      74      69
 crafty_test     347     132     148     168     169     168     162     169
