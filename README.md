@@ -439,11 +439,18 @@ This version beats version 0.75 around 60-65% of the time.
 
 #### Links
 
-Bruce Moreland's chess programming tips (very good!)
-Advanced topics concerning chess programming
-Tricky positions to test on a chess engine
-Alarm chess engine
-PGN Specification 
-Assorted papers on computer chess. 
-Winboard forum. (Contains a very good forum on chess programming)
-Talkchess. (Contains a very good forum on chess programming)
+[Bruce Moreland's chess programming tips](http://www.brucemo.com/compchess/programming/) (very good!)
+
+[Advanced topics concerning chess programming](http://members.home.nl/matador/chess840.htm)
+
+[Tricky positions to test on a chess engine](http://www.codenet.se/alarm/positions.htm)
+
+[Alarm chess engine](http://www.codenet.se/alarm/)
+
+[PGN Specification](http://www.very-best.de/pgn-spec.htm)
+
+[Assorted papers on computer chess](http://www.zendurl.com/m/mizar/documents/chess_papers.html)
+
+[Winboard forum](http://wbforum.vpittlik.org/) (Contains a very good forum on chess programming)
+
+[Talkchess](http://www.talkchess.com/) (Contains a very good forum on chess programming)
