@@ -6,14 +6,23 @@ Amundsen is an XBoard compatible chess playing program, and it can participate i
 A name change took place between version 0.25 and 0.3. The reason was that when the program started playing at FICS, the name jonte was taken already. 
 
 Some matches against other engines:
+
 amundsen v. 0.80 vs. crafty 20.14: 16-57-27
+
 amundsen v. 0.75 vs. crafty 20.14: 15-72-13
+
 amundsen v. 0.70 vs. crafty 20.14: 8-74-18
+
 amundsen v. 0.65 vs. crafty 20.14: 13-81-6
 
+
+
 amundsen v. 0.80 vs. gnuchess v. 5.07: 57-23-20
+
 amundsen v. 0.75 vs. gnuchess v. 5.07: 59-24-17
+
 amundsen v. 0.70 vs. gnuchess v. 5.07: 45-32-23
+
 amundsen v. 0.65 vs. gnuchess v. 5.07: 30-52-18
 
 
@@ -64,29 +73,32 @@ Feel free to download the code and do whatever you want with it.
 #### Opening book
 
 Put the opening book in the same directory as the executable.
-openings.bok 
+[openings.bok](https://github.com/johnbergbom/Amundsen/blob/master/opening_book/openings.bok)
 
 #### Windows binaries
 
-Dann Corbit's builds:
-amundsen_0_65_1.exe (v. 0.65.1) 
-amundsen.zip(v. 0.55)
+###### Dann Corbit's builds:
+[amundsen_0_65_1.exe](https://github.com/johnbergbom/Amundsen/blob/master/builds/amundsen_0_65_1.exe) (v. 0.65.1) 
 
-#### Jim Ablett's builds
+###### Jim Ablett's builds
 
-amundsen080_ja.zip (win32 + x64) 
-amundsen075_ja.zip (win32 + x64) 
-amundsen070.zip (win32 + x64) 
-amundsen_0651_x64-win32_ja.zip (win32 + x64 + universal build for older processors) 
-amundsen060.zip 
-Amundsen055.zip 
+[amundsen080_ja.zip](https://github.com/johnbergbom/Amundsen/blob/master/builds/amundsen080_ja.zip) (win32 + x64) 
+
+[amundsen075_ja.zip](https://github.com/johnbergbom/Amundsen/blob/master/builds/amundsen075_ja.zip) (win32 + x64) 
+
+[amundsen070.zip](https://github.com/johnbergbom/Amundsen/blob/master/builds/amundsen070.zip) (win32 + x64) 
+
+[amundsen_0651_x64-win32_ja.zip](https://github.com/johnbergbom/Amundsen/blob/master/builds/amundsen_0651_x64-win32_ja.zip) (win32 + x64 + universal build for older processors) 
 
 #### Debian/Ubuntu packets
 
-amundsen_0.80-1_i386.deb 
-amundsen_0.75-1_i386.deb 
-amundsen_0.70-1_i386.deb 
-amundsen_0.65.1-1_i386.deb
+[amundsen_0.80-1_i386.deb](https://github.com/johnbergbom/Amundsen/blob/master/debian_packages/amundsen_0.80-1_i386.deb) 
+
+[amundsen_0.75-1_i386.deb](https://github.com/johnbergbom/Amundsen/blob/master/debian_packages/amundsen_0.75-1_i386.deb) 
+
+[amundsen_0.70-1_i386.deb](https://github.com/johnbergbom/Amundsen/blob/master/debian_packages/amundsen_0.70-1_i386.deb) 
+
+[amundsen_0.65.1-1_i386.deb](https://github.com/johnbergbom/Amundsen/blob/master/debian_packages/amundsen_0.65.1-1_i386.deb)
 
 #### Compilation instructions
 
