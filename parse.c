@@ -600,17 +600,22 @@ void check_if_game_is_over(struct board **board, int *started) {
 }
 
 /* Returns the sequence of played moves so far. */
-char *get_gamestring(struct board *board, char *opening_str) {
+char *get_gamestring(int move_number, char *opening_str) {
   char *dragstr;
   int i = 0, pos = 0;
   
-  dragstr = (char *) malloc(20*sizeof(char));
-  while (i < board->move_number) {
-    move2str(&((*historik)[i++].move),dragstr);
-    strcpy(&(opening_str[pos]),dragstr);
-    pos += strlen(dragstr);
+  if (!move_number) {
+    sprintf(opening_str,"null");
+  } else {
+    dragstr = (char *) malloc(20*sizeof(char));
+    while (i < move_number) {
+      move2str(&((*historik)[i++].move),dragstr);
+      strcpy(&(opening_str[pos]),dragstr);
+      pos += strlen(dragstr);
+    }
+    free(dragstr);
   }
-  free(dragstr);
+
   return opening_str;
 }
 
@@ -627,9 +632,6 @@ void computer_make_move(struct board **board, int *started, int max_depth,
   int last_nodes, pre_pre_last_nodes;
   int book_spr;
   int val;
-
-  str2 = (char *) malloc(200*sizeof(char));
-  str = (char *) malloc(200*sizeof(char));
 
   if (pondering) {
     if (!(*book)) {
@@ -730,11 +732,18 @@ void computer_make_move(struct board **board, int *started, int max_depth,
 			 last_nodes,pre_pre_last_nodes);
       if (book_spr) {
 	/* If we just got out of the book, then let's print a message
-	   to the log describing the evaluation value. */
+	   to the log describing the evaluation value.
+	   The char* management has been moved here, so in the case
+	   of an unusually deep book, sprintf doesn't buffer overflow. */
+	str2 = (char *) malloc((*board)->move_number*5*sizeof(char));
+	str = (char *) malloc(60+(*board)->move_number*5*sizeof(char));
 	sprintf(str,"Evaluation when getting out of book = %d (opening = %s)",
-		val,get_gamestring(*board,str2));
+		val,get_gamestring((*board)->move_number,str2));
 	//printf("%s\n",str);
 	infolog(str);
+
+	free(str);
+	free(str2);
       }
     }
     play_move(board,&move,"engine's move",started);
@@ -742,8 +751,6 @@ void computer_make_move(struct board **board, int *started, int max_depth,
   }
   zero_success_failure_count();
 
-  free(str);
-  free(str2);
   return;
 }
 
@@ -2375,7 +2382,6 @@ void parse() {
 	  max_depth = temp;
 	} else if (strcmp(input,"go") == 0) {
 	  started = 1;
-	  book = 1;
 	  engine_color = Color;
 	  if (board->color_at_move == BLACK && board->move_number == 0) {
 	    board->color_at_move = WHITE;
