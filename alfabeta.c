@@ -706,7 +706,6 @@ void check_input(struct board *board) {
 	  pending_input = 0;
 	  }*/
       } else if (input[0] == '\0') {
-	fprintf(stderr,">");
 	pending_input = 0;
       } else {
 	/*if (mode != XBOARD_MODE)

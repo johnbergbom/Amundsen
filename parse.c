@@ -509,7 +509,7 @@ int bookmove(int *in_book, struct board *board, struct move *move) {
 }
 
 void play_move(struct board **board, struct move *move,
-	       const char *prefix) {
+	       const char *prefix, int *started) {
   char *str, *str2;
 
   str = (char *) malloc(100*sizeof(char));
@@ -527,7 +527,7 @@ void play_move(struct board **board, struct move *move,
     infolog(str2);
     printf("%s\n",str2);
   } else {
-    if ((*board)->color_at_move != engine_color)
+    if ((*board)->color_at_move != engine_color && *started)
       printf("move %s\n",str);
     sprintf(str2,"%s: move %s",prefix,str);
     infolog(str2);
@@ -600,17 +600,22 @@ void check_if_game_is_over(struct board **board, int *started) {
 }
 
 /* Returns the sequence of played moves so far. */
-char *get_gamestring(struct board *board, char *opening_str) {
+char *get_gamestring(int move_number, char *opening_str) {
   char *dragstr;
   int i = 0, pos = 0;
   
-  dragstr = (char *) malloc(20*sizeof(char));
-  while (i < board->move_number) {
-    move2str(&((*historik)[i++].move),dragstr);
-    strcpy(&(opening_str[pos]),dragstr);
-    pos += strlen(dragstr);
+  if (!move_number) {
+    sprintf(opening_str,"null");
+  } else {
+    dragstr = (char *) malloc(20*sizeof(char));
+    while (i < move_number) {
+      move2str(&((*historik)[i++].move),dragstr);
+      strcpy(&(opening_str[pos]),dragstr);
+      pos += strlen(dragstr);
+    }
+    free(dragstr);
   }
-  free(dragstr);
+
   return opening_str;
 }
 
@@ -627,9 +632,6 @@ void computer_make_move(struct board **board, int *started, int max_depth,
   int last_nodes, pre_pre_last_nodes;
   int book_spr;
   int val;
-
-  str2 = (char *) malloc(200*sizeof(char));
-  str = (char *) malloc(200*sizeof(char));
 
   if (pondering) {
     if (!(*book)) {
@@ -658,7 +660,7 @@ void computer_make_move(struct board **board, int *started, int max_depth,
 	move.old_passant = (*board)->passant;
 	move.old_moves_left_to_draw = (*board)->moves_left_to_draw;
 	guessed_opp_move = move;
-	play_move(board,&move,"predicted opponent move");
+	play_move(board,&move,"predicted opponent move",started);
 	//stored_board = **board;
 	
 	if ((status = game_ended(*board))) {
@@ -692,7 +694,7 @@ void computer_make_move(struct board **board, int *started, int max_depth,
 	    restore_time();
 	    *wait_for_oppmove = 1; //No pondering until next opp move done
 	  } else if (status & BEST_MOVE_FOUND) {
-	    play_move(board,&new_move,"engine's move (successfully pondered)");
+	    play_move(board,&new_move,"engine's move (successfully pondered)",started);
 	    check_if_game_is_over(board,started);
 	    stop_own_clock();
 	    start_opp_clock();
@@ -730,20 +732,25 @@ void computer_make_move(struct board **board, int *started, int max_depth,
 			 last_nodes,pre_pre_last_nodes);
       if (book_spr) {
 	/* If we just got out of the book, then let's print a message
-	   to the log describing the evaluation value. */
+	   to the log describing the evaluation value.
+	   The char* management has been moved here, so in the case
+	   of an unusually deep book, sprintf doesn't buffer overflow. */
+	str2 = (char *) malloc((*board)->move_number*5*sizeof(char));
+	str = (char *) malloc(60+(*board)->move_number*5*sizeof(char));
 	sprintf(str,"Evaluation when getting out of book = %d (opening = %s)",
-		val,get_gamestring(*board,str2));
+		val,get_gamestring((*board)->move_number,str2));
 	//printf("%s\n",str);
 	infolog(str);
+
+	free(str);
+	free(str2);
       }
     }
-    play_move(board,&move,"engine's move");
+    play_move(board,&move,"engine's move",started);
     check_if_game_is_over(board,started);
   }
   zero_success_failure_count();
 
-  free(str);
-  free(str2);
   return;
 }
 
@@ -2065,7 +2072,7 @@ int parsemove(char *input, struct board **board, int *started,
 	infolog(str);
       } else {
 	*wait_for_oppmove = 0;
-	play_move(board,&move,"Opponent's move");
+	play_move(board,&move,"Opponent's move",started);
 
 	/* Check if game is over. If draw by repetition is reached, then a
 	   draw will not be claimed unless draw_score() >= eval(board)
@@ -2185,8 +2192,8 @@ void parse() {
   zero_success_failure_count();
 
   /*//set_fen_board(board,"8/8/P7/1K6/8/P4p2/8/k7 w - - 0 1");
-  //set_fen_board(board,"8/8/8/6P1/8/p3K2k/8/8 w - - 0 1"); //denna blir fel, borde bli ungefär noll, men blir -612 => nu korrekt
-  //set_fen_board(board,"8/8/8/6P1/8/p3K1k1/8/8 w - - 0 1"); //denna blir fel, borde bli ungefär noll, men blir 538 => nu korrekt
+  //set_fen_board(board,"8/8/8/6P1/8/p3K2k/8/8 w - - 0 1"); //denna blir fel, borde bli ungefÃ¤r noll, men blir -612 => nu korrekt
+  //set_fen_board(board,"8/8/8/6P1/8/p3K1k1/8/8 w - - 0 1"); //denna blir fel, borde bli ungefÃ¤r noll, men blir 538 => nu korrekt
   //set_fen_board(board,"8/K7/8/6P1/8/p5k1/8/8 w - - 0 1"); //denna blir fel, borde bli mycket starkt negativ (ca -650), men blir -102 => nu korrekt
   //set_fen_board(board,"8/K7/6P1/8/8/p5k1/8/8 b - - 0 1");
   //set_fen_board(board,"8/8/7P/3KP3/8/p7/8/1k7 b - - 0 1"); //=> funkar
@@ -2208,8 +2215,6 @@ void parse() {
   if (mode == DEBUG_MODE)
     printf("debug");
 #endif
-  if (mode != XBOARD_MODE)
-    fprintf(stderr,">");
     
   while (run) {
     if (started && pondering_in_use && !wait_for_oppmove)
@@ -2288,7 +2293,7 @@ void parse() {
 	    timectrl = TIMECTRL_NOINC;
 	  sprintf(str,"timectrl = %d",timectrl);
 	  infolog(str);
-	} else if (strcmp(input,"protover 2") == 0) {
+	} else if (strncmp(input,"protover",8) == 0) {
 	  printf("feature ping=1 setboard=1 variants=\"normal\" analyze=0 myname=\"%s\" colors=1 reuse=1 time=1 draw=1 sigint=0 sigterm=1 done=1\n",PACKAGE_STRING);
 	} else if (strncmp(input,"accepted",8) == 0) {
 	  //do nothing
@@ -2377,7 +2382,6 @@ void parse() {
 	  max_depth = temp;
 	} else if (strcmp(input,"go") == 0) {
 	  started = 1;
-	  book = 1;
 	  engine_color = Color;
 	  if (board->color_at_move == BLACK && board->move_number == 0) {
 	    board->color_at_move = WHITE;
@@ -2561,8 +2565,6 @@ void parse() {
       if (mode == DEBUG_MODE)
 	printf("debug");
 #endif
-      if (mode != XBOARD_MODE)
-	fprintf(stderr,">");
     }
   }
   free(pawn_table);
