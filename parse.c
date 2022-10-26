@@ -509,7 +509,7 @@ int bookmove(int *in_book, struct board *board, struct move *move) {
 }
 
 void play_move(struct board **board, struct move *move,
-	       const char *prefix) {
+	       const char *prefix, int *started) {
   char *str, *str2;
 
   str = (char *) malloc(100*sizeof(char));
@@ -527,7 +527,7 @@ void play_move(struct board **board, struct move *move,
     infolog(str2);
     printf("%s\n",str2);
   } else {
-    if ((*board)->color_at_move != engine_color)
+    if ((*board)->color_at_move != engine_color && *started)
       printf("move %s\n",str);
     sprintf(str2,"%s: move %s",prefix,str);
     infolog(str2);
@@ -658,7 +658,7 @@ void computer_make_move(struct board **board, int *started, int max_depth,
 	move.old_passant = (*board)->passant;
 	move.old_moves_left_to_draw = (*board)->moves_left_to_draw;
 	guessed_opp_move = move;
-	play_move(board,&move,"predicted opponent move");
+	play_move(board,&move,"predicted opponent move",started);
 	//stored_board = **board;
 	
 	if ((status = game_ended(*board))) {
@@ -692,7 +692,7 @@ void computer_make_move(struct board **board, int *started, int max_depth,
 	    restore_time();
 	    *wait_for_oppmove = 1; //No pondering until next opp move done
 	  } else if (status & BEST_MOVE_FOUND) {
-	    play_move(board,&new_move,"engine's move (successfully pondered)");
+	    play_move(board,&new_move,"engine's move (successfully pondered)",started);
 	    check_if_game_is_over(board,started);
 	    stop_own_clock();
 	    start_opp_clock();
@@ -737,7 +737,7 @@ void computer_make_move(struct board **board, int *started, int max_depth,
 	infolog(str);
       }
     }
-    play_move(board,&move,"engine's move");
+    play_move(board,&move,"engine's move",started);
     check_if_game_is_over(board,started);
   }
   zero_success_failure_count();
@@ -2065,7 +2065,7 @@ int parsemove(char *input, struct board **board, int *started,
 	infolog(str);
       } else {
 	*wait_for_oppmove = 0;
-	play_move(board,&move,"Opponent's move");
+	play_move(board,&move,"Opponent's move",started);
 
 	/* Check if game is over. If draw by repetition is reached, then a
 	   draw will not be claimed unless draw_score() >= eval(board)
@@ -2185,8 +2185,8 @@ void parse() {
   zero_success_failure_count();
 
   /*//set_fen_board(board,"8/8/P7/1K6/8/P4p2/8/k7 w - - 0 1");
-  //set_fen_board(board,"8/8/8/6P1/8/p3K2k/8/8 w - - 0 1"); //denna blir fel, borde bli ungefär noll, men blir -612 => nu korrekt
-  //set_fen_board(board,"8/8/8/6P1/8/p3K1k1/8/8 w - - 0 1"); //denna blir fel, borde bli ungefär noll, men blir 538 => nu korrekt
+  //set_fen_board(board,"8/8/8/6P1/8/p3K2k/8/8 w - - 0 1"); //denna blir fel, borde bli ungefÃ¤r noll, men blir -612 => nu korrekt
+  //set_fen_board(board,"8/8/8/6P1/8/p3K1k1/8/8 w - - 0 1"); //denna blir fel, borde bli ungefÃ¤r noll, men blir 538 => nu korrekt
   //set_fen_board(board,"8/K7/8/6P1/8/p5k1/8/8 w - - 0 1"); //denna blir fel, borde bli mycket starkt negativ (ca -650), men blir -102 => nu korrekt
   //set_fen_board(board,"8/K7/6P1/8/8/p5k1/8/8 b - - 0 1");
   //set_fen_board(board,"8/8/7P/3KP3/8/p7/8/1k7 b - - 0 1"); //=> funkar
@@ -2208,8 +2208,6 @@ void parse() {
   if (mode == DEBUG_MODE)
     printf("debug");
 #endif
-  if (mode != XBOARD_MODE)
-    fprintf(stderr,">");
     
   while (run) {
     if (started && pondering_in_use && !wait_for_oppmove)
@@ -2288,7 +2286,7 @@ void parse() {
 	    timectrl = TIMECTRL_NOINC;
 	  sprintf(str,"timectrl = %d",timectrl);
 	  infolog(str);
-	} else if (strcmp(input,"protover 2") == 0) {
+	} else if (strncmp(input,"protover",8) == 0) {
 	  printf("feature ping=1 setboard=1 variants=\"normal\" analyze=0 myname=\"%s\" colors=1 reuse=1 time=1 draw=1 sigint=0 sigterm=1 done=1\n",PACKAGE_STRING);
 	} else if (strncmp(input,"accepted",8) == 0) {
 	  //do nothing
@@ -2561,8 +2559,6 @@ void parse() {
       if (mode == DEBUG_MODE)
 	printf("debug");
 #endif
-      if (mode != XBOARD_MODE)
-	fprintf(stderr,">");
     }
   }
   free(pawn_table);
